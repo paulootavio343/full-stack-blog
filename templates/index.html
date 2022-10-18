@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'assets/css/home-trending.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/home-content.css' %}">
+{% endblock %}
+
+{% block code %}
+    <script src="{% static 'assets/js/home-slide.js' %}" type="text/javascript" defer></script>
+{% endblock %}
+
+{% block content %}
+    <section class="trending">
+        <h2 class="section-title">Most recent</h2>
+
+        <div class="trending-container">
+            {% for post in posts|slice:":5" %}
+            <article style="background-image: url('{{ post.image.url }}');">
+                <a href="{% url 'blog_content:detail' post.slug post.id %}">
+                    <h2 class="title">{{ post.title }}</h2>
+                    <p class="day-time">
+                        <img src="{% static 'assets/icons/profile_icon.svg' %}" alt="Profile">
+                        {{ post.user.first_name }}
+                        <img src="{% static 'assets/icons/calendar_month.svg' %}" alt="Calendar">
+                        {{ post.publication_date }}
+                    </p>
+                    <span class="category">
+                        <img src="{% static 'assets/icons/category.svg' %}" alt="Category">
+                        {{ post.post_category }}
+                    </span>
+                    <div class="shadow"></div>
+                </a>
+            </article>
+            {% endfor %}
+        </div>
+
+        <div class="slide-buttons">
+            <div class="button button-left" title="Move slide left.">
+                <img src="{% static 'assets/icons/chevron_left_white.svg' %}" alt="Move slide left.">
+            </div>
+            <div class="button button-right" title="Move slide right.">
+                <img src="{% static 'assets/icons/chevron_right_white.svg' %}" alt="Move slide right.">
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <h2 class="section-title">Other posts</h2>
+
+        <div class="content-container infinite-container">
+            {% for post in posts|slice:"5:" %}
+            <article class="card infinite-item">
+                <a href="{% url 'blog_content:detail' post.slug post.id %}">
+                    <img src="{{ post.image.url }}" alt="{{ post.image_description }}" class="image">
+                </a>
+
+                <span>{{ post.post_category }}</span>
+
+                <a href="{% url 'blog_content:detail' post.slug post.id %}">
+                    <h2>{{ post.title }}</h2>
+                </a>
+
+                <p class="day-time">
+                    <img src="{% static 'assets/icons/profile_icon_dark.svg' %}" alt="Profile">
+                    {{ post.user.first_name }}
+                    <img src="{% static 'assets/icons/calendar_month_dark.svg' %}" alt="Calendar">
+                    {{ post.publication_date }}
+                </p>
+            </article>
+            {% endfor %}
+        </div>
+
+        {% if page_obj.has_next %}
+        <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}" style="display: none;"></a>
+        {% endif %}
+    </section>
+{% endblock %}

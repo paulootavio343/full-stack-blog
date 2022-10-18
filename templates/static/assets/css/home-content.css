@@ -1,0 +1,73 @@
+.content {
+    padding: 0 1rem 4rem 1rem;
+    margin: 0 auto;
+    max-width: var(--default-max-width);
+}
+
+.content .section-title {
+    padding: 0 1rem;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem 2rem;
+    padding-top: 4rem;
+}
+
+.content-container .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 42rem;
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+    background-color: var(--white-color);
+    box-shadow: 0 0 4rem #d3d3d3;
+    transition: var(--default-transition);
+}
+
+.content-container .card:hover {
+    transform: scale(1.02);
+}
+
+.content-container .card .image {
+    border-radius: 1rem;
+    transform: translateY(-3rem);
+    box-shadow: 0 1rem 1rem #d3d3d3;
+    transition: var(--default-transition);
+}
+
+.content-container .card:hover .image {
+    transform: translateY(-4rem);
+}
+
+.content-container .card span {
+    margin-bottom: 1rem;
+    color: var(--blue-color);
+}
+
+.content-container .card a {
+    color: var(--dark-color);
+}
+
+.content-container .card h2 {
+    font-size: 2rem;
+}
+
+.content-container .card span,
+.content-container .card h2,
+.content-container .card p {
+    padding: 0 2rem;
+}
+
+.content-container .card .day-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.4rem;
+    margin-top: 0.5rem;
+}

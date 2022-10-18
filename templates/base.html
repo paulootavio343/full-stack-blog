@@ -1,0 +1,174 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#222a33"> <!-- Chrome Android and Safari -->
+
+    <meta name="author" content="{% block author %}Blog Author{% endblock %}">
+    <meta name="description" 
+        content="{% block description %}Full-stack blog made with HTML, CSS, JavaScript, Python and Django.{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}full, stack, blog, html, css, javascript, python, django{% endblock %}">
+    <title>Blog - {% block title %}Home page{% endblock %}</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'site.webmanifest' %}">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'assets/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/cookie-consent.css' %}">
+    {% block style %}{% endblock %}
+
+    <!-- Code -->
+    <script src="{% static 'assets/js/menu.js' %}" type="text/javascript" defer></script>
+    <script src="{% static 'assets/js/cookie-consent.js' %}" type="text/javascript" defer></script>
+    <script src="{% static 'assets/js/service-worker-registration.js' %}" type="text/javascript" defer></script>
+    {% block code %}{% endblock %}
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" 
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="{% url 'blog_content:index' %}">
+                <img src="{% static 'android-chrome-192x192.png' %}" alt="Logo">
+            </a>
+
+            <ul class="list">
+                <li><a href="{% url 'blog_content:index' %}">Home</a></li>
+                <li class="list-item">
+                    <a class="list-link">
+                        Categories
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
+                            <path d="M12 14.95q-.2 0-.375-.063-.175-.062-.325-.212L6.675 
+                                10.05q-.275-.275-.262-.688.012-.412.287-.687.275-.275.7-.275.425 0 
+                                .7.275l3.9 3.9 3.925-3.925q.275-.275.688-.263.412.013.687.288.275.275.275.7 0 
+                                .425-.275.7l-4.6 4.6q-.15.15-.325.212-.175.063-.375.063Z" />
+                        </svg>
+                    </a>
+                    <ul>
+                        {% for category in categories %}
+                        <li>
+                            <a href="{% url 'blog_content:category' category.category_slug %}">
+                                {{ category.category_name }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="list-item">
+                    <a class="list-link">
+                        Social Networks
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
+                            <path d="M12 14.95q-.2 0-.375-.063-.175-.062-.325-.212L6.675 
+                                10.05q-.275-.275-.262-.688.012-.412.287-.687.275-.275.7-.275.425 0 
+                                .7.275l3.9 3.9 3.925-3.925q.275-.275.688-.263.412.013.687.288.275.275.275.7 0 
+                                .425-.275.7l-4.6 4.6q-.15.15-.325.212-.175.063-.375.063Z" />
+                        </svg>
+                    </a>
+                    <ul>
+                        {% for social_network in social_networks %}
+                        <li>
+                            <a href="{{ social_network.social_network_link }}" rel="nofollow" target="_blank">
+                                {{ social_network.social_network_name }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li><a href="#">About</a></li>
+            </ul>
+
+            <form class="search" method="get" action="{% url 'blog_content:search' %}">
+                <input type="search" placeholder="Search here..." name="search" value="{{ request.GET.search }}">
+                <button type="submit">Search</button>
+            </form>
+
+            <div class="mobile-menu" title="Menu">
+                <div class="line line-1"></div>
+                <div class="line line-2"></div>
+                <div class="line line-3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="contact-container">
+            <div class="contact-group">
+                <h1>Contact</h1>
+
+                <ul>
+                    <li>
+                        <img src="{% static 'assets/icons/mail.svg' %}" alt="Email">
+                        example@email.com
+                    </li>
+                    <li>
+                        <img src="{% static 'assets/icons/call.svg' %}" alt="Phone">
+                        +55 35 98888-8888
+                    </li>
+                    <li>
+                        <img src="{% static 'assets/icons/pin_drop.svg' %}" alt="Location">
+                        City, State, Country
+                    </li>
+                </ul>
+            </div>
+
+            <div class="about">
+                <h1 class="about">About</h1>
+                <p>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis labore repellendus 
+                    soluta a, eveniet, itaque non architecto nesciunt totam necessitatibus praesentium quasi. 
+                    Quis eveniet, error illo architecto labore et eum.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-container">
+            <p>Open source project on <a href="https://github.com/paulootavio343/blog-full-stack"  
+                rel="nofollow" target="_blank">GitHub</a>.</p>
+        </div>
+    </footer>
+
+    <div class="cookie-consent">
+        <h2 class="cookie-consent-title">Cookies</h2>
+
+        <p class="cookie-consent-desc">
+            This website uses cookies to personalize your experience.
+            More information in our <a href="#">privacy policy</a>.
+        </p>
+
+        <div class="cookie-consent-button">
+            <button type="button" class="accepted">Accept</button>
+            <button type="button" class="refused">Refuse</button>
+        </div>
+    </div>
+
+    <!-- Infinite scroll code -->
+    <script src="{% static 'assets/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'assets/js/infinite.min.js' %}"></script>
+    
+    <script>
+        var infinite = new Waypoint.Infinite({
+            element: $('.infinite-container')[0],
+            offset: 'bottom-in-view',
+        });
+    </script>
+</body>
+
+</html>

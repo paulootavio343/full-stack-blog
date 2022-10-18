@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block author %}{{ post.user }}{% endblock %}
+{% block description %}{{ post.excerpt }}{% endblock %}
+{% block keywords %}{{ post.keywords }}{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'assets/css/post-content.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="post">
+        <div class="post-content">
+            <div class="post-content-container">
+                <div class="navigation">
+                    <p>
+                        <a href="{% url 'blog_content:index' %}">Home</a>
+                        <img src="{% static 'assets/icons/chevron_right.svg' %}" alt="Right arrow">
+                        <a href="{% url 'blog_content:category' post.post_category.category_slug %}">
+                            {{ post.post_category }}
+                        </a>
+                        <img src="{% static 'assets/icons/chevron_right.svg' %}" alt="Right arrow">
+                        <a href="{% url 'blog_content:detail' post.slug post.id%}">
+                            {{ post.title }}
+                        </a>
+                    </p>
+                </div>
+
+                <div class="title">
+                    <h1>{{ post.title }}</h1>
+                    <p>{{ post.user.first_name }} | {{ post.publication_date }} | {{ post.post_category }}</p>
+                </div>
+
+                <img src="{{ post.image.url }}" alt="{{ post.image_description }}">
+
+                <p>{{ post.content|safe }}</p>
+            </div>
+        </div>
+
+        {% if page_obj %}
+        <div class="post-content infinite infinite-container">
+            <div class="post-content-container infinite-item">
+                {% for content in page_obj %}
+                <div class="title">
+                    <h1>{{ content.title }}</h1>
+                    <p>{{ content.user.first_name }} | {{ content.publication_date }} | {{ content.post_category }}</p>
+                </div>
+
+                <img src="{{ content.image.url }}" alt="{{ content.image_description }}">
+
+                <p>{{ content.content|safe }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+        <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}" style="display: none;"></a>
+        {% endif %}
+    </section>
+{% endblock %}

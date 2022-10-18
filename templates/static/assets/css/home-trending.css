@@ -1,0 +1,124 @@
+.trending {
+    width: 100%;
+    max-width: var(--default-max-width);
+    margin: 0 auto;
+}
+
+.trending .section-title {
+    padding: 2rem;
+}
+
+.trending-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 2rem;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+.trending-container article {
+    width: 62rem;
+    height: 40rem;
+    min-width: 62rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: var(--default-transition);
+}
+
+.trending-container article:first-child {
+    margin-left: 2rem;
+}
+
+.trending-container article:last-child {
+    margin-right: 2rem;
+}
+
+.trending-container article a {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: var(--white-color);
+    transition: var(--default-transition);
+}
+
+.trending-container article a:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.trending-container article a h2 {
+    margin-bottom: 1rem;
+    font-size: 2.6rem;
+}
+
+.trending-container article a .day-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.4rem;
+}
+
+.trending-container article a .category {
+    position: absolute;
+    top: 1.6rem;
+    left: 1.6rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--blue-color);
+    padding: 0.8rem 1.2rem;
+    border-radius: 1rem;
+}
+
+.trending-container article a .category img {
+    width: 3.2rem;
+    height: auto;
+}
+
+.slide-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4rem;
+    margin: 2rem;
+}
+
+.slide-buttons .button {
+    background-color: var(--blue-color);
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    box-shadow: 0 0 3rem var(--blue-color);
+    transition: var(--default-transition);
+    cursor: pointer;
+}
+
+.slide-buttons .button:hover {
+    transform: scale(1.10);
+}
+
+.slide-buttons .button:active {
+    transform: scale(0.90);
+}
+
+.slide-buttons .button img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width: 960px) {
+    .trending-container article {
+        min-width: calc(100% - 4rem);
+    }
+}

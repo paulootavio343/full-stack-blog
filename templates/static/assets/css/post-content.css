@@ -1,0 +1,49 @@
+.post-content {
+    margin-top: 8rem;
+    padding: 4rem 1rem;
+}
+
+.post-content.infinite {
+    margin-top: 0;
+    padding: 0 1rem;
+}
+
+.post-content-container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.post-content.infinite .post-content-container {
+    margin: 4rem auto;
+}
+
+.post-content-container .navigation {
+    margin-bottom: 1rem;
+}
+
+.post-content-container .navigation p {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.post-content-container .navigation p a {
+    color: var(--dark-color);
+    transition: var(--default-transition);
+}
+
+.post-content-container .navigation p a:hover {
+    color: var(--blue-color);
+}
+
+.post-content-container .navigation p img {
+    height: 2.4rem;
+    margin: 0;
+}
+
+.post-content-container img {
+    display: block;
+    border-radius: 1rem;
+    margin: 2rem auto;
+}
