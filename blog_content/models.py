@@ -89,10 +89,10 @@ class Post(models.Model):
             new_slug = slugify(self.title)
             self.slug = new_slug
 
-        super().save(*args, **kwargs)
-
         if self.image:
-            resize_image(self.image.name, 1280, 720)
+            self.image = resize_image(self.image, 1280, 720)
+
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Post'
